@@ -1,17 +1,22 @@
-const express=require('express')
-const Router=express.Router()
-const bodyparser=require('body-parser')
-const {register,login,authAdmin,createusers}=require("../Controllers/adminController")
-const body=bodyparser.urlencoded({extended:false})
-const jwt=require("jsonwebtoken")
+const express = require("express");
+const Router = express.Router();
 
-Router.post('/register',register)
-Router.post('/login',login)
-Router.post('/users',authAdmin,createusers)
-Router.get('/users',()=>{})
-Router.get('/users/:id',()=>{})
-Router.put('/users/:id',()=>{})
-Router.delete('/users/:id',()=>{})
-module.exports=Router
+const {
+  register,
+  login,
+  authAdmin,
+  createusers,
+  Getusers,
+  Getusersbyid,
+  updateusers,
+  Deleteusers
+} = require("../Controllers/adminController");
 
-
+Router.post("/register", register);
+Router.post("/login", login);
+Router.post("/users", authAdmin, createusers);
+Router.get("/users", authAdmin, Getusers);
+Router.get("/users/:id", authAdmin, Getusersbyid);
+Router.put("/users/:id", authAdmin, updateusers);
+Router.delete("/users/:id", authAdmin, Deleteusers);
+module.exports = Router;
